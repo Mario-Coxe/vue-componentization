@@ -1,10 +1,6 @@
 <!-- src/components/button/Button.vue -->
 <template>
-  <button
-    :class="['btn', buttonTypeClass, sizeClass, { disabled: isDisabled }]"
-    :disabled="isDisabled"
-    @click="handleClick"
-  >
+  <button :class="['btn', buttonClasses]" :disabled="isDisabled" @click="handleClick">
     <i v-if="icon" :class="iconClass"></i>
     <slot></slot>
   </button>
@@ -34,19 +30,12 @@ const props = defineProps({
 
 const emit = defineEmits(['click'])
 
-const buttonTypeClass = computed(() => {
-  return `btn-${props.type}`
+const buttonClasses = computed(() => {
+  return [`btn-${props.type}`, sizeClass.value, { disabled: props.isDisabled }]
 })
 
 const sizeClass = computed(() => {
-  switch (props.size) {
-    case 'sm':
-      return 'btn-sm'
-    case 'lg':
-      return 'btn-lg'
-    default:
-      return ''
-  }
+  return props.size === 'sm' ? 'btn-sm' : props.size === 'lg' ? 'btn-lg' : ''
 })
 
 const iconClass = computed(() => {

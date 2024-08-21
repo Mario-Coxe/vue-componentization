@@ -16,7 +16,7 @@ const handleButtonClick = () => {
           </div>
           <div class="card-body text-center">
             <MyButton
-              type="success"
+              type="warning"
               size="btn-lg"
               :isDisabled="false"
               icon="fas fa-edit"
