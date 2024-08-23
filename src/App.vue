@@ -1,17 +1,24 @@
 <script setup lang="ts">
-import Button from '@/components/button/Button.vue'
-import Widget from './components/box/Box.vue'
+import { ref } from 'vue'
+import Button from '@/components/button/button.vue'
+import Widget from '@/components/box/box.vue'
+import SearchInput from '@/components/search-input/search-input.vue'
 
-// Função para manipular o clique do botão
 const handleButtonClick = () => {
   console.log('Botão foi clicado!')
+}
+
+const searchResult = ref('')
+
+const handleSearch = (query: string) => {
+  searchResult.value = query
+  console.log('Valor digitado:', query)
 }
 </script>
 
 <template>
   <div class="container mt-4">
     <div class="row justify-content-center">
-      <!-- Card para o componente Button -->
       <div class="col-md-6 mb-4">
         <div class="card">
           <div class="card-header">
@@ -29,6 +36,11 @@ const handleButtonClick = () => {
             </Button>
           </div>
         </div>
+      </div>
+
+      <!-- Componente SearchInput -->
+      <div class="col-md-6 mb-4">
+        <SearchInput placeholder="User name..." @search="handleSearch" />
       </div>
 
       <!-- Linhas e colunas para os boxes -->
@@ -78,6 +90,4 @@ const handleButtonClick = () => {
   </div>
 </template>
 
-<style scoped>
-/* Adicione estilos personalizados aqui, se necessário */
-</style>
+<style scoped></style>
