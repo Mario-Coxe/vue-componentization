@@ -14,7 +14,7 @@ const handleButtonClick = () => {
 const searchResult = ref('')
 const isChecked = ref(false)
 const textValue = ref('')
-
+const inputGeneric = ref()
 const handleSearch = (query: string) => {
   searchResult.value = query
   console.log('Valor digitado:', query)
@@ -33,10 +33,6 @@ const selectedValue = ref<string | number>()
 </script>
 
 <template>
-  <!--
-
-        <genericInput type="checkbox" label="Text Input" v-model="textValue" />
-
   <div class="container mt-4">
     <div class="row justify-content-center">
       <div class="col-md-6 mb-4">
@@ -63,7 +59,6 @@ const selectedValue = ref<string | number>()
       </div>
 
       <div class="row">
-        
         <div class="col-md-6">
           <Widget
             title="150"
@@ -73,7 +68,6 @@ const selectedValue = ref<string | number>()
           />
         </div>
 
-   
         <div class="col-md-6">
           <Widget
             title="53"
@@ -84,7 +78,6 @@ const selectedValue = ref<string | number>()
           />
         </div>
 
-   
         <div class="col-md-6">
           <Widget
             title="44"
@@ -94,7 +87,6 @@ const selectedValue = ref<string | number>()
           />
         </div>
 
-        
         <div class="col-md-6">
           <Widget
             title="65"
@@ -119,11 +111,15 @@ const selectedValue = ref<string | number>()
         />
 
         <genericInput type="text" label="Text Input" v-model="textValue" placeholder="Enter text" />
+        <genericInput
+          type="checkbox"
+          label="Text Input"
+          v-model="inputGeneric"
+          placeholder="digite"
+        />
       </div>
     </div>
   </div>
-
-  !-->
 </template>
 
 <style scoped></style>

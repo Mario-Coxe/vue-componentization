@@ -4,10 +4,10 @@
     <input
       :type="type"
       :class="inputClass"
-      :placeholder="type !== 'checkbox' ? placeholder : undefined"
+      :placeholder="type === 'text' ? placeholder : undefined"
       :disabled="disabled"
       :checked="type === 'checkbox' ? (modelValue as boolean) : undefined"
-      :value="type !== 'checkbox' ? (modelValue as string) : undefined"
+      :value="type === 'text' ? (modelValue as string) : undefined"
       @input="onInput"
       @change="onChange"
     />
