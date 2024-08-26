@@ -5,6 +5,7 @@ import Widget from '@/components/box/box.vue'
 import SearchInput from '@/components/search-input/search-input.vue'
 import Checkbox from '@/components/checkbox/checkbox.vue'
 import Select from '@/components/select/select.vue'
+import Input from '@/components/input/input.vue'
 
 const handleButtonClick = () => {
   console.log('Botão foi clicado!')
@@ -12,11 +13,14 @@ const handleButtonClick = () => {
 
 const searchResult = ref('')
 const isChecked = ref(false)
+const textValue = ref('')
 
 const handleSearch = (query: string) => {
   searchResult.value = query
   console.log('Valor digitado:', query)
   console.log(isChecked.value)
+  console.log(selectedValue.value)
+  console.log(textValue.value)
 }
 
 const dropdownOptions = ref([
@@ -103,6 +107,12 @@ const selectedValue = ref<string | number>()
         </div>
 
         <Select :options="dropdownOptions" v-model="selectedValue" />
+        <Input
+          label="Text Disabled"
+          placeholder="Enter ..."
+          :disabled="false"
+          v-model="textValue"
+        />
       </div>
     </div>
   </div>
