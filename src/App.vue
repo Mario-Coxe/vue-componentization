@@ -4,6 +4,7 @@ import Button from '@/components/button/button.vue'
 import Widget from '@/components/box/box.vue'
 import SearchInput from '@/components/search-input/search-input.vue'
 import Checkbox from '@/components/checkbox/checkbox.vue'
+import Select from '@/components/select/select.vue'
 
 const handleButtonClick = () => {
   console.log('Botão foi clicado!')
@@ -17,6 +18,14 @@ const handleSearch = (query: string) => {
   console.log('Valor digitado:', query)
   console.log(isChecked.value)
 }
+
+const dropdownOptions = ref([
+  { label: 'Opção 1', value: '1' },
+  { label: 'Opção 2', value: 2 },
+  { label: 'Opção 3', value: 3 }
+])
+
+const selectedValue = ref<string | number>()
 </script>
 
 <template>
@@ -41,12 +50,10 @@ const handleSearch = (query: string) => {
         </div>
       </div>
 
-      <!-- Componente SearchInput -->
       <div class="col-md-6 mb-4">
         <SearchInput placeholder="User name..." @search="handleSearch" />
       </div>
 
-      <!-- Linhas e colunas para os boxes -->
       <div class="row">
         <!-- Box 1 -->
         <div class="col-md-6">
@@ -94,6 +101,8 @@ const handleSearch = (query: string) => {
         <div class="container mt-4">
           <Checkbox id="checkbox1" label="Aceito os termos e condições" v-model="isChecked" />
         </div>
+
+        <Select :options="dropdownOptions" v-model="selectedValue" />
       </div>
     </div>
   </div>
