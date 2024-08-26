@@ -7,6 +7,8 @@ import Checkbox from '@/components/checkbox/checkbox.vue'
 import Select from '@/components/select/select.vue'
 import Input from '@/components/input/input.vue'
 import genericInput from './components/generic-input/generic-input.vue'
+import Table from './components/table/table.vue'
+
 const handleButtonClick = () => {
   console.log('Botão foi clicado!')
 }
@@ -31,9 +33,56 @@ const dropdownOptions = ref([
 ])
 
 const selectedValue = ref<string | number>()
+
+const tableColumns = [
+  { key: 'id', label: 'ID' },
+  { key: 'user', label: 'User' },
+  { key: 'date', label: 'Date' },
+  { key: 'status', label: 'Status' },
+  { key: 'reason', label: 'Reason' }
+]
+
+const tableData = [
+  {
+    id: 183,
+    user: 'John Doe',
+    date: '11-7-2014',
+    status: 'Approved',
+    reason: 'Bacon ipsum dolor sit amet.'
+  },
+  {
+    id: 219,
+    user: 'Alexander Pierce',
+    date: '11-7-2014',
+    status: 'Pending',
+    reason: 'Bacon ipsum dolor sit amet.'
+  },
+  {
+    id: 657,
+    user: 'Bob Doe',
+    date: '11-7-2014',
+    status: 'Approved',
+    reason: 'Bacon ipsum dolor sit amet.'
+  },
+  {
+    id: 175,
+    user: 'Mike Doe',
+    date: '11-7-2014',
+    status: 'Denied',
+    reason: 'Bacon ipsum dolor sit amet.'
+  }
+]
 </script>
 
 <template>
+  <Table
+    :title="'Users'"
+    :columns="tableColumns"
+    :data="tableData"
+    :search="true"
+    searchPlaceholder="Search items..."
+  />
+  <!--
   <div class="container mt-4">
     <div class="row justify-content-center">
       <div class="col-md-6 mb-4">
@@ -127,6 +176,7 @@ const selectedValue = ref<string | number>()
       </div>
     </div>
   </div>
+  !-->
 </template>
 
 <style scoped></style>

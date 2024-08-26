@@ -11,6 +11,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css'
 import 'admin-lte/dist/js/adminlte.min.js'
 import '@fortawesome/fontawesome-free/css/all.css'
 import '@fortawesome/fontawesome-free/js/all.js'
+import 'moment'
 
 const app = createApp(App)
 
