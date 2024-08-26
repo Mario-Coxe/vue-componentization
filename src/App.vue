@@ -6,7 +6,7 @@ import SearchInput from '@/components/search-input/search-input.vue'
 import Checkbox from '@/components/checkbox/checkbox.vue'
 import Select from '@/components/select/select.vue'
 import Input from '@/components/input/input.vue'
-
+import genericInput from './components/generic-input/generic-input.vue'
 const handleButtonClick = () => {
   console.log('Botão foi clicado!')
 }
@@ -33,6 +33,9 @@ const selectedValue = ref<string | number>()
 </script>
 
 <template>
+  <genericInput type="checkbox" label="Check me sdddd" v-model="isChecked" />
+
+  <!--
   <div class="container mt-4">
     <div class="row justify-content-center">
       <div class="col-md-6 mb-4">
@@ -59,7 +62,7 @@ const selectedValue = ref<string | number>()
       </div>
 
       <div class="row">
-        <!-- Box 1 -->
+        
         <div class="col-md-6">
           <Widget
             title="150"
@@ -69,7 +72,7 @@ const selectedValue = ref<string | number>()
           />
         </div>
 
-        <!-- Box 2 -->
+   
         <div class="col-md-6">
           <Widget
             title="53"
@@ -80,7 +83,7 @@ const selectedValue = ref<string | number>()
           />
         </div>
 
-        <!-- Box 3 -->
+   
         <div class="col-md-6">
           <Widget
             title="44"
@@ -90,7 +93,7 @@ const selectedValue = ref<string | number>()
           />
         </div>
 
-        <!-- Box 4 -->
+        
         <div class="col-md-6">
           <Widget
             title="65"
@@ -113,9 +116,13 @@ const selectedValue = ref<string | number>()
           :disabled="false"
           v-model="textValue"
         />
+
+        <genericInput type="text" label="Text Input" v-model="textValue" placeholder="Enter text" />
       </div>
     </div>
   </div>
+
+  !-->
 </template>
 
 <style scoped></style>

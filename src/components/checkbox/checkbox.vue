@@ -2,7 +2,7 @@
   <div class="form-check d-flex align-items-center">
     <input
       class="form-check-input me-2"
-      type="checkbox"
+      :type="'checkbox'"
       :id="id"
       :checked="modelValue"
       @change="onChange"
@@ -30,7 +30,6 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['update:modelValue'])
-
 
 const onChange = (event: Event) => {
   const target = event.target as HTMLInputElement
