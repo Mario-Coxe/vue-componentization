@@ -1,16 +1,14 @@
 <template>
-  <div class="col-sm-6">
-    <div class="form-group">
-      <label v-if="label">{{ label }}</label>
-      <input
-        type="text"
-        class="form-control"
-        :placeholder="placeholder"
-        :disabled="disabled"
-        :value="modelValue"
-        @input="onInput"
-      />
-    </div>
+  <div class="form-group">
+    <label v-if="label">{{ label }}</label>
+    <input
+      type="text"
+      class="form-control"
+      :placeholder="placeholder"
+      :disabled="disabled"
+      :value="modelValue"
+      @input="onInput"
+    />
   </div>
 </template>
 
@@ -44,5 +42,4 @@ const onInput = (event: Event) => {
 }
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

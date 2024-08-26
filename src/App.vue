@@ -33,9 +33,10 @@ const selectedValue = ref<string | number>()
 </script>
 
 <template>
-  <genericInput type="checkbox" label="Check me sdddd" v-model="isChecked" />
-
   <!--
+
+        <genericInput type="checkbox" label="Text Input" v-model="textValue" />
+
   <div class="container mt-4">
     <div class="row justify-content-center">
       <div class="col-md-6 mb-4">

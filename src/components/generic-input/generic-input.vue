@@ -52,7 +52,7 @@ const labelClass = computed(() => {
 })
 
 const inputClass = computed(() => {
-  return props.type === 'checkbox' ? 'form-check-input me-2' : 'form-control'
+  return props.type === 'checkbox' ? 'form-check-input' : 'form-control'
 })
 
 const onInput = (event: Event) => {
