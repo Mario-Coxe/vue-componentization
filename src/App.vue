@@ -3,16 +3,19 @@ import { ref } from 'vue'
 import Button from '@/components/button/button.vue'
 import Widget from '@/components/box/box.vue'
 import SearchInput from '@/components/search-input/search-input.vue'
+import Checkbox from '@/components/checkbox/checkbox.vue'
 
 const handleButtonClick = () => {
   console.log('Botão foi clicado!')
 }
 
 const searchResult = ref('')
+const isChecked = ref(false)
 
 const handleSearch = (query: string) => {
   searchResult.value = query
   console.log('Valor digitado:', query)
+  console.log(isChecked.value)
 }
 </script>
 
@@ -84,6 +87,12 @@ const handleSearch = (query: string) => {
             icon="fas fa-chart-pie"
             boxType="bg-danger"
           />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="container mt-4">
+          <Checkbox id="checkbox1" label="Aceito os termos e condições" v-model="isChecked" />
         </div>
       </div>
     </div>
