@@ -15,6 +15,7 @@ const searchResult = ref('')
 const isChecked = ref(false)
 const textValue = ref('')
 const inputGeneric = ref()
+
 const handleSearch = (query: string) => {
   searchResult.value = query
   console.log('Valor digitado:', query)
@@ -113,6 +114,12 @@ const selectedValue = ref<string | number>()
         <genericInput type="text" label="Text Input" v-model="textValue" placeholder="Enter text" />
         <genericInput
           type="checkbox"
+          label="Text Input"
+          v-model="inputGeneric"
+          placeholder="digite"
+        />
+        <genericInput
+          type="radio"
           label="Text Input"
           v-model="inputGeneric"
           placeholder="digite"

@@ -6,8 +6,8 @@
       :class="inputClass"
       :placeholder="type === 'text' ? placeholder : undefined"
       :disabled="disabled"
-      :checked="type === 'checkbox' ? (modelValue as boolean) : undefined"
-      :value="type === 'text' ? (modelValue as string) : undefined"
+      :checked="type === 'checkbox' || type === 'radio' ? modelValue === value : undefined"
+      :value="type === 'text' ? modelValue : value"
       @input="onInput"
       @change="onChange"
     />
@@ -21,7 +21,7 @@ const props = defineProps({
   type: {
     type: String,
     default: 'text',
-    validator: (value: string) => ['text', 'checkbox'].includes(value)
+    validator: (value: string) => ['text', 'checkbox', 'radio'].includes(value)
   },
   label: {
     type: String,
@@ -38,36 +38,44 @@ const props = defineProps({
   modelValue: {
     type: [String, Boolean],
     default: ''
+  },
+  value: {
+    type: [String, Boolean],
+    default: ''
   }
 })
 
 const emit = defineEmits(['update:modelValue'])
 
 const containerClass = computed(() => {
-  return props.type === 'checkbox' ? 'form-check d-flex align-items-center' : 'form-group'
+  return props.type === 'checkbox' || props.type === 'radio'
+    ? 'form-check d-flex align-items-center'
+    : 'form-group'
 })
 
 const labelClass = computed(() => {
-  return props.type === 'checkbox' ? 'form-check-label' : ''
+  return props.type === 'checkbox' || props.type === 'radio' ? 'form-check-label' : ''
 })
 
 const inputClass = computed(() => {
-  return props.type === 'checkbox' ? 'form-check-input' : 'form-control'
+  return props.type === 'checkbox' || props.type === 'radio' ? 'form-check-input' : 'form-control'
 })
 
 const onInput = (event: Event) => {
-  if (props.type !== 'checkbox') {
+  if (props.type === 'text') {
     const target = event.target as HTMLInputElement
     emit('update:modelValue', target.value)
   }
 }
 
 const onChange = (event: Event) => {
-  if (props.type === 'checkbox') {
-    const target = event.target as HTMLInputElement
-    emit('update:modelValue', target.checked)
+  const target = event.target as HTMLInputElement
+  if (props.type === 'checkbox' || props.type === 'radio') {
+    emit('update:modelValue', target.checked ? props.value : '')
   }
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+/* Estilos adicionais podem ser aplicados aqui, se necessário */
+</style>
