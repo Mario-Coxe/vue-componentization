@@ -19,15 +19,41 @@
         <div class="card-body table-responsive p-0">
           <table class="table table-hover text-nowrap">
             <thead>
-              <tr>
-                <th>ID</th> <!-- Nova coluna para o ID -->
+              <tr class="text-center">
+                <th>ID</th>
+                <!-- Coluna para o ID -->
                 <th v-for="column in columns" :key="column.key">{{ column.label }}</th>
+                <th v-if="buttonActions">Ações</th>
+                <!-- Coluna para os botões de ação -->
               </tr>
             </thead>
-            <tbody>
+
+            <tbody class="text-center">
               <tr v-for="(row, index) in data" :key="index">
-                <td>{{ index + 1 }}</td> <!-- Exibe o número do registro começando de 1 -->
+                <td>{{ index + 1 }}</td>
+                <!-- Exibe o número do registro começando de 1 -->
                 <td v-for="column in columns" :key="column.key">{{ row[column.key] }}</td>
+                <td v-if="buttonActions" class="d-flex align-items-center">
+                  <div class="input-group-append p-1">
+                    <Button
+                      type="btn-sm btn-primary"
+                      size="btn-lg"
+                      :isDisabled="editIsDisabled"
+                      icon="fas fa-edit"
+                    >
+                      Editar
+                    </Button>
+                  </div>
+
+                  <Button
+                    type="btn-sm btn-danger ms-3"
+                    size="btn-lg"
+                    :isDisabled="deleteIsDisabled"
+                    icon="fas fa-trash"
+                  >
+                    Eliminar
+                  </Button>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -40,7 +66,7 @@
 <script setup lang="ts">
 import { ref, defineProps } from 'vue'
 import SearchInput from '../search-input/search-input.vue'
-
+import Button from '../button/button.vue'
 const props = defineProps({
   title: {
     type: String,
@@ -57,10 +83,30 @@ const props = defineProps({
   search: {
     type: Boolean,
     default: true
+  },
+  buttonActions: {
+    type: Boolean,
+    default: false
+  },
+  editIsDisabled: {
+    type: Boolean,
+    default: false
+  },
+  deleteIsDisabled: {
+    type: Boolean,
+    default: false
   }
 })
 
 const selectedColumn = ref(props.columns[0].key)
+
+const editRow = (index: number) => {
+  console.log('Editar linha', index)
+}
+
+const deleteRow = (index: number) => {
+  console.log('Eliminar linha', index)
+}
 </script>
 
 <style scoped>

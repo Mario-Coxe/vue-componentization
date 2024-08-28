@@ -79,6 +79,8 @@ const tableData = [
     :columns="tableColumns"
     :data="tableData"
     :search="true"
+    :buttonActions="true"
+    :editIsDisabled="true"
     searchPlaceholder="Search items..."
   />
   <!--
