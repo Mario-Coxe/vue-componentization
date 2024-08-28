@@ -20,11 +20,13 @@
           <table class="table table-hover text-nowrap">
             <thead>
               <tr>
+                <th>ID</th> <!-- Nova coluna para o ID -->
                 <th v-for="column in columns" :key="column.key">{{ column.label }}</th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="(row, index) in data" :key="index">
+                <td>{{ index + 1 }}</td> <!-- Exibe o número do registro começando de 1 -->
                 <td v-for="column in columns" :key="column.key">{{ row[column.key] }}</td>
               </tr>
             </tbody>
@@ -36,7 +38,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, defineProps } from 'vue'
+import { ref, defineProps } from 'vue'
 import SearchInput from '../search-input/search-input.vue'
 
 const props = defineProps({

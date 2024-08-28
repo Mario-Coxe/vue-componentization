@@ -35,7 +35,6 @@ const dropdownOptions = ref([
 const selectedValue = ref<string | number>()
 
 const tableColumns = [
-  { key: 'id', label: 'ID' },
   { key: 'user', label: 'User' },
   { key: 'date', label: 'Date' },
   { key: 'status', label: 'Status' },
