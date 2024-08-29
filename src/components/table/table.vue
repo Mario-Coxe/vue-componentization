@@ -1,76 +1,76 @@
 <template>
-    <div class="row justify-content-md-center">
-      <div class="card">
-        <div class="card-header d-flex justify-content-between align-items-center">
-          <h3 class="card-title">{{ title }}</h3>
-          <div v-if="search" class="card-tools">
-            <div class="input-group input-group-sm btn-sm optionbox">
-              <select v-model="selectedColumn" class="form-select form-select-sm me-2">
-                <option v-for="column in columns" :key="column.key" :value="column.key">
-                  {{ column.label }}
-                </option>
-              </select>
-              <SearchInput placeholder="Pesquisar..." class="form-control" />
-              <DataTime @filter="onDateFilter" @clear="onClearFilter" />
+  <div class="row justify-content-md-center">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h3 class="card-title">{{ title }}</h3>
+        <div v-if="search" class="card-tools">
+          <div class="input-group input-group-sm btn-sm optionbox">
+            <select v-model="selectedColumn" class="form-select form-select-sm me-2">
+              <option v-for="column in columns" :key="column.key" :value="column.key">
+                {{ column.label }}
+              </option>
+            </select>
+            <SearchInput placeholder="Pesquisar..." class="form-control" />
+            <DataTime @filter="onDateFilter" @clear="onClearFilter" @getDataTime="getDataTime" />
 
-              <button class="btn btn-sm btn-primary ms-2">
-                <i class="fas fa-search"></i> Filtrar
-              </button>
-              <button class="btn btn-sm btn btn-outline-danger ms-2">
-                <i class="fas fa-eraser"></i> Limpar
-              </button>
-              <button
-                v-if="showRegisterButton"
-                class="btn btn-sm btn-outline-dark ms-2"
-                :disabled="registerButtonIsDisabled"
-              >
-                <i class="fas fa-plus"></i> Registrar
-              </button>
-            </div>
+            <button class="btn btn-sm btn-primary ms-2">
+              <i class="fas fa-search"></i> Filtrar
+            </button>
+            <button class="btn btn-sm btn btn-outline-danger ms-2">
+              <i class="fas fa-eraser"></i> Limpar
+            </button>
+            <button
+              v-if="showRegisterButton"
+              class="btn btn-sm btn-outline-dark ms-2"
+              :disabled="registerButtonIsDisabled"
+            >
+              <i class="fas fa-plus"></i> Registrar
+            </button>
           </div>
         </div>
-        <div class="card-body table-responsive p-0">
-          <table class="table table-hover text-nowrap">
-            <thead>
-              <tr class="text-center">
-                <th>ID</th>
-                <th v-for="column in columns" :key="column.key">{{ column.label }}</th>
-                <th v-if="buttonActions">Ações</th>
-              </tr>
-            </thead>
+      </div>
+      <div class="card-body table-responsive p-0">
+        <table class="table table-hover text-nowrap">
+          <thead>
+            <tr class="text-center">
+              <th>ID</th>
+              <th v-for="column in columns" :key="column.key">{{ column.label }}</th>
+              <th v-if="buttonActions">Ações</th>
+            </tr>
+          </thead>
 
-            <tbody class="text-center">
-              <tr v-for="(row, index) in data" :key="index">
-                <td>{{ index + 1 }}</td>
-                <!-- Exibe o número do registro começando de 1 -->
-                <td v-for="column in columns" :key="column.key">{{ row[column.key] }}</td>
-                <td v-if="buttonActions" class="d-flex align-items-center">
-                  <div class="input-group-append p-1">
-                    <Button
-                      type="btn-sm btn-primary"
-                      size="btn-lg"
-                      isDisabled="editIsDisabled"
-                      icon="fas fa-edit"
-                    >
-                      Editar
-                    </Button>
-                  </div>
-
+          <tbody class="text-center">
+            <tr v-for="(row, index) in data" :key="index">
+              <td>{{ index + 1 }}</td>
+              <!-- Exibe o número do registro começando de 1 -->
+              <td v-for="column in columns" :key="column.key">{{ row[column.key] }}</td>
+              <td v-if="buttonActions" class="d-flex align-items-center">
+                <div class="input-group-append p-1">
                   <Button
-                    type="btn-sm btn-danger ms-3"
+                    type="btn-sm btn-primary"
                     size="btn-lg"
-                    isDisabled="deleteIsDisabled"
-                    icon="fas fa-trash"
+                    isDisabled="editIsDisabled"
+                    icon="fas fa-edit"
                   >
-                    Eliminar
+                    Editar
                   </Button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+                </div>
+
+                <Button
+                  type="btn-sm btn-danger ms-3"
+                  size="btn-lg"
+                  isDisabled="deleteIsDisabled"
+                  icon="fas fa-trash"
+                >
+                  Eliminar
+                </Button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -81,7 +81,7 @@ import DataTime from '../data-time/data-time.vue'
 const props = defineProps({
   title: {
     type: String,
-    default: 'Responsive Hover Table'
+    default: 'Table'
   },
   columns: {
     type: Array as () => Array<{ key: string; label: string }>,
@@ -119,22 +119,20 @@ const props = defineProps({
 
 const selectedColumn = ref(props.columns[0].key)
 
-const editRow = (index: number) => {
-  console.log('Editar linha', index)
-}
+const startDate = ref<string | null>(null)
+const endDate = ref<string | null>(null)
+const createdAt = ref<string | null>(null)
 
-const deleteRow = (index: number) => {
-  console.log('Eliminar linha', index)
-}
+const getDataTime = (dates: {
+  startDate: string | null
+  endDate: string | null
+  createdAt: string | null
+}) => {
+  startDate.value = dates.startDate
+  endDate.value = dates.endDate
+  createdAt.value = dates.createdAt
 
-const onDateFilter = (dates: { startDate: string | null; endDate: string | null }) => {
-  // Lógica para filtrar os dados com base nas datas
-  console.log('Filtrar por data:', dates)
-}
-
-const onClearFilter = () => {
-  // Lógica para limpar o filtro de data
-  console.log('Filtro de data limpo')
+  console.log(createdAt.value)
 }
 </script>
 

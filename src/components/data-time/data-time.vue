@@ -1,27 +1,55 @@
 <template>
-  <div class="date-filter">
-    <input type="date" v-model="startDate" class="form-control" placeholder="Data inicial" />
+  <div class="date-filter" v-if="isRangeByDate">
+    <input
+      type="date"
+      v-model="startDate"
+      @change="emitDates"
+      class="form-control"
+      placeholder="Data inicial"
+    />
     <span class="mx-2">até</span>
-    <input type="date" v-model="endDate" class="form-control" placeholder="Data final" />
+    <input
+      type="date"
+      v-model="endDate"
+      @change="emitDates"
+      class="form-control"
+      placeholder="Data final"
+    />
+  </div>
+
+  <div class="date-filter" v-if="!isRangeByDate">
+    <input
+      type="date"
+      v-model="createdAt"
+      @change="emitDates"
+      class="form-control"
+      placeholder="Data inicial"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, defineEmits } from 'vue'
+import { ref, defineEmits, defineProps } from 'vue'
 
-const emit = defineEmits(['filter', 'clear'])
+const emit = defineEmits(['updateDates'])
+
+const props = defineProps({
+  isRangeByDate: {
+    type: Boolean,
+    default: false
+  }
+})
 
 const startDate = ref<string | null>(null)
 const endDate = ref<string | null>(null)
+const createdAt = ref<string | null>(null)
 
-const applyFilter = () => {
-  emit('filter', { startDate: startDate.value, endDate: endDate.value })
-}
-
-const clearFilter = () => {
-  startDate.value = null
-  endDate.value = null
-  emit('clear')
+const emitDates = () => {
+  emit('getDataTime', {
+    startDate: startDate.value,
+    endDate: endDate.value,
+    createdAt: createdAt.value
+  })
 }
 </script>
 
@@ -33,9 +61,5 @@ const clearFilter = () => {
 
 .date-filter input {
   width: 150px;
-}
-
-.date-filter button {
-  white-space: nowrap;
 }
 </style>
