@@ -81,6 +81,8 @@ const tableData = [
     :search="true"
     :buttonActions="true"
     :editIsDisabled="true"
+    :registerButtonIsDisabled="true"
+    :showRegisterButton="true"
     searchPlaceholder="Search items..."
   />
   <!--

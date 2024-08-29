@@ -6,13 +6,27 @@
           <h3 class="card-title">{{ title }}</h3>
 
           <div v-if="search" class="card-tools">
-            <div class="input-group input-group-sm optionbox">
+            <div class="input-group input-group-sm btn-sm optionbox">
               <select v-model="selectedColumn" class="form-select form-select-sm me-2">
                 <option v-for="column in columns" :key="column.key" :value="column.key">
                   {{ column.label }}
                 </option>
               </select>
               <SearchInput placeholder="Pesquisar..." class="form-control" />
+
+              <button class="btn btn-sm btn-primary ms-2">
+                <i class="fas fa-search"></i> Filtrar
+              </button>
+              <button class="btn btn-sm btn btn-outline-danger ms-2">
+                <i class="fas fa-eraser"></i> Limpar
+              </button>
+              <button
+                v-if="showRegisterButton"
+                class="btn btn-sm btn-outline-dark ms-2"
+                :disabled="registerButtonIsDisabled"
+              >
+                <i class="fas fa-plus"></i> Registrar
+              </button>
             </div>
           </div>
         </div>
@@ -21,10 +35,8 @@
             <thead>
               <tr class="text-center">
                 <th>ID</th>
-                <!-- Coluna para o ID -->
                 <th v-for="column in columns" :key="column.key">{{ column.label }}</th>
                 <th v-if="buttonActions">Ações</th>
-                <!-- Coluna para os botões de ação -->
               </tr>
             </thead>
 
@@ -38,7 +50,7 @@
                     <Button
                       type="btn-sm btn-primary"
                       size="btn-lg"
-                      :isDisabled="editIsDisabled"
+                      isDisabled="editIsDisabled"
                       icon="fas fa-edit"
                     >
                       Editar
@@ -48,7 +60,7 @@
                   <Button
                     type="btn-sm btn-danger ms-3"
                     size="btn-lg"
-                    :isDisabled="deleteIsDisabled"
+                    isDisabled="deleteIsDisabled"
                     icon="fas fa-trash"
                   >
                     Eliminar
@@ -93,6 +105,14 @@ const props = defineProps({
     default: false
   },
   deleteIsDisabled: {
+    type: Boolean,
+    default: false
+  },
+  showRegisterButton: {
+    type: Boolean,
+    default: true
+  },
+  registerButtonIsDisabled: {
     type: Boolean,
     default: false
   }
