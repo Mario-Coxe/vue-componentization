@@ -1,10 +1,8 @@
 <template>
-  <div class="container">
-    <div class="col-12">
+    <div class="row justify-content-md-center">
       <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
           <h3 class="card-title">{{ title }}</h3>
-
           <div v-if="search" class="card-tools">
             <div class="input-group input-group-sm btn-sm optionbox">
               <select v-model="selectedColumn" class="form-select form-select-sm me-2">
@@ -13,6 +11,7 @@
                 </option>
               </select>
               <SearchInput placeholder="Pesquisar..." class="form-control" />
+              <DataTime @filter="onDateFilter" @clear="onClearFilter" />
 
               <button class="btn btn-sm btn-primary ms-2">
                 <i class="fas fa-search"></i> Filtrar
@@ -72,13 +71,13 @@
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script setup lang="ts">
 import { ref, defineProps } from 'vue'
 import SearchInput from '../search-input/search-input.vue'
 import Button from '../button/button.vue'
+import DataTime from '../data-time/data-time.vue'
 const props = defineProps({
   title: {
     type: String,
@@ -126,6 +125,16 @@ const editRow = (index: number) => {
 
 const deleteRow = (index: number) => {
   console.log('Eliminar linha', index)
+}
+
+const onDateFilter = (dates: { startDate: string | null; endDate: string | null }) => {
+  // Lógica para filtrar os dados com base nas datas
+  console.log('Filtrar por data:', dates)
+}
+
+const onClearFilter = () => {
+  // Lógica para limpar o filtro de data
+  console.log('Filtro de data limpo')
 }
 </script>
 

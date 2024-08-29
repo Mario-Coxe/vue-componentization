@@ -85,6 +85,7 @@ const tableData = [
     :showRegisterButton="true"
     searchPlaceholder="Search items..."
   />
+
   <!--
   <div class="container mt-4">
     <div class="row justify-content-center">
