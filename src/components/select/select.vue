@@ -1,14 +1,12 @@
 <template>
-  <div class="col-md-6">
-    <select class="form-control" :value="modelValue" @change="onChange">
-      <option :value="modelValue" disabled selected>
-        {{ placeholder }}
-      </option>
-      <option v-for="option in options" :key="option.value" :value="option.value">
-        {{ option.label }}
-      </option>
-    </select>
-  </div>
+  <select class="form-control" :value="modelValue" @change="onChange">
+    <option :value="modelValue" disabled selected>
+      {{ placeholder }}
+    </option>
+    <option v-for="option in options" :key="option.value" :value="option.value">
+      {{ option.label }}
+    </option>
+  </select>
 </template>
 
 <script setup lang="ts">
@@ -37,6 +35,4 @@ const onChange = (event: Event) => {
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

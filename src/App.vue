@@ -74,6 +74,9 @@ const tableData = [
 </script>
 
 <template>
+  <Select :options="dropdownOptions" v-model="selectedValue" />
+
+  <!--
   <Table
     :title="'Users'"
     :columns="tableColumns"
@@ -86,7 +89,7 @@ const tableData = [
     searchPlaceholder="Search items..."
   />
 
-  <!--
+
   <div class="container mt-4">
     <div class="row justify-content-center">
       <div class="col-md-6 mb-4">
@@ -156,7 +159,7 @@ const tableData = [
           <Checkbox id="checkbox1" label="Aceito os termos e condições" v-model="isChecked" />
         </div>
 
-        <Select :options="dropdownOptions" v-model="selectedValue" />
+ 
         <Input
           label="Text Disabled"
           placeholder="Enter ..."
