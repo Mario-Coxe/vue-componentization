@@ -10,7 +10,7 @@ import app_genericInput from './components/app_generic-input/app_generic-input.v
 import app_table from './components/app_table/app_table.vue'
 
 const handleButtonClick = () => {
-  console.log('Botão foi clicado!')
+  console.log('selects >', selectedValue.value)
 }
 
 const searchResult = ref('')
@@ -74,9 +74,49 @@ const tableData = [
 </script>
 
 <template>
-  <app_select :options="dropdownOptions" v-model="selectedValue" />
+  <app_table
+    :title="'Users'"
+    :columns="tableColumns"
+    :data="tableData"
+    :search="true"
+    :buttonActions="true"
+    :editIsDisabled="true"
+    :registerButtonIsDisabled="true"
+    :showRegisterButton="true"
+    :isRangeByDateFilter="false"
+  />
 
   <!--
+  <div class="card-body text-center">
+    <app_button
+      type="warning"
+      size="btn-lg"
+      :isDisabled="false"
+      icon="fas fa-edit"
+      @click="handleButtonClick"
+    >
+      Editar
+    </app_button>
+  </div>
+
+  <app_select
+    :options="dropdownOptions"
+    :placeholder="'Selecione a opção'"
+    v-model="selectedValue"
+  />
+
+  <div>
+    <app_widget
+      title="53"
+      subtitle="%"
+      description="Bounce Rate"
+      icon="ion ion-stats-bars"
+      boxType="bg-success"
+    />
+  </div>
+
+
+
   <app_table
     :title="'Users'"
     :columns="tableColumns"

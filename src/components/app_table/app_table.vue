@@ -11,7 +11,7 @@
               </option>
             </select>
             <app_searchInput placeholder="Pesquisar..." class="form-control" />
-            <app_data_time @getDataTime="getDataTime" />
+            <app_data_time @getDataTime="getDataTime" :isRangeByDate="isRangeByDateFilter" />
 
             <button class="btn btn-sm btn-primary ms-2">
               <i class="fas fa-search"></i> Filtrar
@@ -74,67 +74,68 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineProps } from "vue";
-import app_data_time from "../app_data_time/app_data_time.vue";
-import app_button from "../app_button/app_button.vue";
-import app_searchInput from "../app_search-input/app_search-input.vue";
+import { ref, defineProps } from 'vue'
+import app_data_time from '../app_data_time/app_data_time.vue'
+import app_button from '../app_button/app_button.vue'
+import app_searchInput from '../app_search-input/app_search-input.vue'
 
 const props = defineProps({
   title: {
     type: String,
-    default: "Table",
+    default: 'Table'
   },
   columns: {
     type: Array as () => Array<{ key: string; label: string }>,
-    required: true,
+    required: true
   },
   data: {
     type: Array as () => Array<Record<string, any>>,
-    required: true,
+    required: true
   },
   search: {
     type: Boolean,
-    default: true,
+    default: true
   },
   buttonActions: {
     type: Boolean,
-    default: false,
+    default: false
   },
   editIsDisabled: {
     type: Boolean,
-    default: false,
+    default: false
   },
   deleteIsDisabled: {
     type: Boolean,
-    default: false,
+    default: false
   },
   showRegisterButton: {
     type: Boolean,
-    default: true,
+    default: true
   },
   registerButtonIsDisabled: {
     type: Boolean,
-    default: false,
+    default: false
   },
-});
+  isRangeByDateFilter: {
+    type: Boolean,
+    default: false
+  }
+})
 
-const selectedColumn = ref(props.columns[0].key);
-
-const startDate = ref<string | null>(null);
-const endDate = ref<string | null>(null);
-const createdAt = ref<string | null>(null);
+const selectedColumn = ref(props.columns[0].key)
+const startDate = ref<string | null>(null)
+const endDate = ref<string | null>(null)
+const createdAt = ref<string | null>(null)
 
 const getDataTime = (dates: {
-  startDate: string | null;
-  endDate: string | null;
-  createdAt: string | null;
+  startDate: string | null
+  endDate: string | null
+  createdAt: string | null
 }) => {
-  startDate.value = dates.startDate;
-  endDate.value = dates.endDate;
-  createdAt.value = dates.createdAt;
-
-  console.log(createdAt.value);
-};
+  startDate.value = dates.startDate
+  endDate.value = dates.endDate
+  createdAt.value = dates.createdAt
+}
 </script>
 
 <style scoped>
