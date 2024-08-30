@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { toast, type ToastOptions } from 'vue3-toastify'
 import app_button from './components/app_button/app_button.vue'
 import app_widget from './components/app_widget/app_widget.vue'
 import app_searchInput from './components/app_search-input/app_search-input.vue'
@@ -8,6 +9,7 @@ import app_select from './components/app_select/app_select.vue'
 import app_input from './components/app_input/app_input.vue'
 import app_genericInput from './components/app_generic-input/app_generic-input.vue'
 import app_table from './components/app_table/app_table.vue'
+import app_toast_alert from './components/app_toast_alert/app_toast_alert.vue'
 
 const handleButtonClick = () => {
   console.log('selects >', selectedValue.value)
@@ -71,10 +73,32 @@ const tableData = [
     reason: 'Bacon ipsum dolor sit amet.'
   }
 ]
+
+const notificationMessage = ref('Operação realizada com sucesso!')
+const notificationType = ref('warning')
+const notificationTrigger = ref(false)
+
+const notifyUser = () => {
+  notificationTrigger.value = true
+}
+
+const handleNotificationSent = () => {
+  console.log('Notificação foi enviada!')
+  notificationTrigger.value = false
+}
 </script>
 
 <template>
-  <app_table
+  <button @click="notifyUser">Enviar Notificação</button>
+  <app_toast_alert
+    :message="notificationMessage"
+    :type="notificationType"
+    :trigger="notificationTrigger"
+    @notificationSent="handleNotificationSent"
+  />
+
+  <!--
+    <app_table
     :title="'Users'"
     :columns="tableColumns"
     :data="tableData"
@@ -85,8 +109,7 @@ const tableData = [
     :showRegisterButton="true"
     :isRangeByDateFilter="false"
   />
-
-  <!--
+  
   <div class="card-body text-center">
     <app_button
       type="warning"
@@ -114,7 +137,6 @@ const tableData = [
       boxType="bg-success"
     />
   </div>
-
 
 
   <app_table
