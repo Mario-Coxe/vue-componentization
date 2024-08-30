@@ -10,8 +10,8 @@
                 {{ column.label }}
               </option>
             </select>
-            <SearchInput placeholder="Pesquisar..." class="form-control" />
-            <DataTime @filter="onDateFilter" @clear="onClearFilter" @getDataTime="getDataTime" />
+            <app_searchInput placeholder="Pesquisar..." class="form-control" />
+            <app_data_time @getDataTime="getDataTime" />
 
             <button class="btn btn-sm btn-primary ms-2">
               <i class="fas fa-search"></i> Filtrar
@@ -46,24 +46,24 @@
               <td v-for="column in columns" :key="column.key">{{ row[column.key] }}</td>
               <td v-if="buttonActions" class="d-flex align-items-center">
                 <div class="input-group-append p-1">
-                  <Button
+                  <app_button
                     type="btn-sm btn-primary"
                     size="btn-lg"
-                    isDisabled="editIsDisabled"
+                    :isDisabled="editIsDisabled"
                     icon="fas fa-edit"
                   >
                     Editar
-                  </Button>
+                  </app_button>
                 </div>
 
-                <Button
+                <app_button
                   type="btn-sm btn-danger ms-3"
                   size="btn-lg"
-                  isDisabled="deleteIsDisabled"
+                  :isDisabled="deleteIsDisabled"
                   icon="fas fa-trash"
                 >
                   Eliminar
-                </Button>
+                </app_button>
               </td>
             </tr>
           </tbody>
@@ -74,66 +74,67 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineProps } from 'vue'
-import SearchInput from '../search-input/search-input.vue'
-import Button from '../button/button.vue'
-import DataTime from '../data-time/data-time.vue'
+import { ref, defineProps } from "vue";
+import app_data_time from "../app_data_time/app_data_time.vue";
+import app_button from "../app_button/app_button.vue";
+import app_searchInput from "../app_search-input/app_search-input.vue";
+
 const props = defineProps({
   title: {
     type: String,
-    default: 'Table'
+    default: "Table",
   },
   columns: {
     type: Array as () => Array<{ key: string; label: string }>,
-    required: true
+    required: true,
   },
   data: {
     type: Array as () => Array<Record<string, any>>,
-    required: true
+    required: true,
   },
   search: {
     type: Boolean,
-    default: true
+    default: true,
   },
   buttonActions: {
     type: Boolean,
-    default: false
+    default: false,
   },
   editIsDisabled: {
     type: Boolean,
-    default: false
+    default: false,
   },
   deleteIsDisabled: {
     type: Boolean,
-    default: false
+    default: false,
   },
   showRegisterButton: {
     type: Boolean,
-    default: true
+    default: true,
   },
   registerButtonIsDisabled: {
     type: Boolean,
-    default: false
-  }
-})
+    default: false,
+  },
+});
 
-const selectedColumn = ref(props.columns[0].key)
+const selectedColumn = ref(props.columns[0].key);
 
-const startDate = ref<string | null>(null)
-const endDate = ref<string | null>(null)
-const createdAt = ref<string | null>(null)
+const startDate = ref<string | null>(null);
+const endDate = ref<string | null>(null);
+const createdAt = ref<string | null>(null);
 
 const getDataTime = (dates: {
-  startDate: string | null
-  endDate: string | null
-  createdAt: string | null
+  startDate: string | null;
+  endDate: string | null;
+  createdAt: string | null;
 }) => {
-  startDate.value = dates.startDate
-  endDate.value = dates.endDate
-  createdAt.value = dates.createdAt
+  startDate.value = dates.startDate;
+  endDate.value = dates.endDate;
+  createdAt.value = dates.createdAt;
 
-  console.log(createdAt.value)
-}
+  console.log(createdAt.value);
+};
 </script>
 
 <style scoped>

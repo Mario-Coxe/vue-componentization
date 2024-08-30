@@ -31,7 +31,7 @@
 <script setup lang="ts">
 import { ref, defineEmits, defineProps } from 'vue'
 
-const emit = defineEmits(['updateDates'])
+const emit = defineEmits(['getDataTime'])
 
 const props = defineProps({
   isRangeByDate: {

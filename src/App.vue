@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import Button from '@/components/button/button.vue'
-import Widget from '@/components/box/box.vue'
-import SearchInput from '@/components/search-input/search-input.vue'
-import Checkbox from '@/components/checkbox/checkbox.vue'
-import Select from '@/components/select/select.vue'
-import Input from '@/components/input/input.vue'
-import genericInput from './components/generic-input/generic-input.vue'
-import Table from './components/table/table.vue'
+import app_button from './components/app_button/app_button.vue'
+import app_widget from './components/app_widget/app_widget.vue'
+import app_searchInput from './components/app_search-input/app_search-input.vue'
+import app_checkbox from './components/app_checkbox/app_checkbox.vue'
+import app_select from './components/app_select/app_select.vue'
+import app_input from './components/app_input/app_input.vue'
+import app_genericInput from './components/app_generic-input/app_generic-input.vue'
+import app_table from './components/app_table/app_table.vue'
 
 const handleButtonClick = () => {
   console.log('Botão foi clicado!')
@@ -74,10 +74,10 @@ const tableData = [
 </script>
 
 <template>
-  <Select :options="dropdownOptions" v-model="selectedValue" />
+  <app_select :options="dropdownOptions" v-model="selectedValue" />
 
   <!--
-  <Table
+  <app_table
     :title="'Users'"
     :columns="tableColumns"
     :data="tableData"
@@ -98,7 +98,7 @@ const tableData = [
             <h5 class="card-title">Usando Button</h5>
           </div>
           <div class="card-body text-center">
-            <Button
+            <app_button
               type="warning"
               size="btn-lg"
               :isDisabled="false"
@@ -106,7 +106,7 @@ const tableData = [
               @click="handleButtonClick"
             >
               Editar
-            </Button>
+            </app_button>
           </div>
         </div>
       </div>
@@ -117,7 +117,7 @@ const tableData = [
 
       <div class="row">
         <div class="col-md-6">
-          <Widget
+          <app_widget
             title="150"
             description="New Orders"
             icon="fas fa-shopping-cart"
@@ -126,7 +126,7 @@ const tableData = [
         </div>
 
         <div class="col-md-6">
-          <Widget
+          <app_widget
             title="53"
             subtitle="%"
             description="Bounce Rate"
@@ -136,7 +136,7 @@ const tableData = [
         </div>
 
         <div class="col-md-6">
-          <Widget
+          <app_widget
             title="44"
             description="User Registrations"
             icon="fas fa-user-plus"
@@ -145,7 +145,7 @@ const tableData = [
         </div>
 
         <div class="col-md-6">
-          <Widget
+          <app_widget
             title="65"
             description="Unique Visitors"
             icon="fas fa-chart-pie"
@@ -156,25 +156,25 @@ const tableData = [
 
       <div class="row">
         <div class="container mt-4">
-          <Checkbox id="checkbox1" label="Aceito os termos e condições" v-model="isChecked" />
+          <app_checkbox id="checkbox1" label="Aceito os termos e condições" v-model="isChecked" />
         </div>
 
  
-        <Input
+        <app_input
           label="Text Disabled"
           placeholder="Enter ..."
           :disabled="false"
           v-model="textValue"
         />
 
-        <genericInput type="text" label="Text Input" v-model="textValue" placeholder="Enter text" />
-        <genericInput
+        <app_genericInput type="text" label="Text Input" v-model="textValue" placeholder="Enter text" />
+        <app_genericInput
           type="checkbox"
           label="Text Input"
           v-model="inputGeneric"
           placeholder="digite"
         />
-        <genericInput
+        <app_genericInput
           type="radio"
           label="Text Input"
           v-model="inputGeneric"
